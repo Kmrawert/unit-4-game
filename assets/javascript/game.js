@@ -7,75 +7,61 @@ var CompGuess = (Math.floor(Math.random() * ((120 - 19) + 1)) + 19);
 console.log("This is the comp. guess " + CompGuess);
 $(ComputerNum).text(CompGuess);
 var yourGuesses = 0;
+var crystal1Val
+var crystal2Val
+var crystal3Val
+var crystal4Val
 
-// random Crystal Values variables
-var crystal1Val = (Math.floor(Math.random() * ((12 - 9) + 1)) + 9);
-console.log("This is the crystal1val " + crystal1Val);
+randomCrysNum();
 
-var crystal2Val = (Math.floor(Math.random() * ((8 - 6) + 1)) + 6);
-console.log("This is the crystal2val " + crystal2Val);
-
-var crystal3Val = (Math.floor(Math.random() * ((5 - 3) + 1)) + 3);
-console.log("This is the crystal3val " + crystal3Val);
-
-var crystal4Val = (Math.floor(Math.random() * ((2 - 1) + 1)) + 1);
-console.log("This is the crystal4val " + crystal4Val);
-// random Crystal Values variables end
+function randomCrysNum () {
+    crystal1Val = (Math.floor(Math.random() * ((12 - 9) + 1)) + 9);
+    crystal2Val = (Math.floor(Math.random() * ((8 - 6) + 1)) + 6);
+    crystal3Val = (Math.floor(Math.random() * ((5 - 3) + 1)) + 3);
+    crystal4Val = (Math.floor(Math.random() * ((2 - 1) + 1)) + 1);
+}
 
 function resetGame() {
     CompGuess = (Math.floor(Math.random() * ((120 - 19) + 1)) + 19);
     $(ComputerNum).text(CompGuess);
     yourGuesses = 0;
     $('#TotalGuesses').empty();
-    crystal1Val = (Math.floor(Math.random() * ((12 - 9) + 1)) + 9);
-    crystal2Val = (Math.floor(Math.random() * ((8 - 6) + 1)) + 6);
-    crystal3Val = (Math.floor(Math.random() * ((5 - 3) + 1)) + 3);
-    crystal4Val = (Math.floor(Math.random() * ((2 - 1) + 1)) + 1);
+    randomCrysNum ();
 };
 
 function playGame() {
+    if (yourGuesses < CompGuess)  return;
     if (CompGuess === yourGuesses){
         wins++;
         $('#wins').text(wins); 
-        resetGame();
     } else if (yourGuesses > CompGuess) {
        losses++;
        $('#losses').text(losses);
-       resetGame();
-    } 
+    }
+    resetGame();
 };
 
 $("#crystal-1").click(function() {
-    $(this).attr("crystal1Val");
-    console.log("you clicked gem1 " + crystal1Val);
-    yourGuesses = yourGuesses + crystal1Val
-    $(TotalGuesses).text(yourGuesses);
-    playGame();
+    handleClick (crystal1Val);
 });
 
 $("#crystal-2").click(function() {
-    $(this).attr("crystal2Val");
-    console.log("you clicked gem2 " + crystal2Val);
-    yourGuesses = yourGuesses + crystal2Val
-    $(TotalGuesses).text(yourGuesses);
-    playGame();
+    handleClick (crystal2Val);
 });
 
 $("#crystal-3").click(function() {
-    $(this).attr("crystal3Val");
-    console.log("you clicked gem3 " + crystal3Val);
-    yourGuesses = yourGuesses + crystal3Val
-    $(TotalGuesses).text(yourGuesses);
-    playGame();
+    handleClick (crystal3Val);
 });
 
-$("#crystal-4").click(function() {
-    $(this).attr("crystal4Val");
-    console.log("you clicked gem4 " + crystal4Val);
-    yourGuesses = yourGuesses + crystal4Val
+$("#crystal-4").click(function() { 
+    handleClick (crystal4Val); 
+});
+
+function handleClick (val) {
+    yourGuesses = yourGuesses + val
     $(TotalGuesses).text(yourGuesses);
     playGame();
-});
+}
 
 //Crystal Game - Pseudo Code
 // Create/clone Git Repository
@@ -113,3 +99,9 @@ $("#crystal-4").click(function() {
     //done
 
 // Potential variables = Wins, Losses, ComputerGuessedNum, Total, YourGuesses, Reset
+
+
+
+
+
+
